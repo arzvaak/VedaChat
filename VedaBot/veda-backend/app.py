@@ -7,7 +7,7 @@ import os
 
 # Flask app setup
 app = Flask(__name__)
-CORS(app)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # MongoDB setup
 mongo_uri = 'mongodb+srv://vedauserbot:iUNYfjcYwU2G@vedass.ex43y5w.mongodb.net/?retryWrites=true&w=majority'  # Replace with your MongoDB Atlas URI
