@@ -29,7 +29,7 @@ export default createStore({
         this.dispatch('generateSessionId');
       }
       try {
-        const response = await axios.post('http://206.189.129.58:5000/history', { session_id: state.sessionId });
+        const response = await axios.post('http://127.0.0.1:5000/history', { session_id: state.sessionId });
         commit('setMessages', response.data);
       } catch (error) {
         console.error('Error fetching messages:', error);
@@ -39,7 +39,7 @@ export default createStore({
       const message = { content: messageContent, sender: 'user' };
       commit('addMessage', message);
       try {
-        const response = await axios.post('http://206.189.129.58:5000/chat', { input: messageContent, session_id: state.sessionId });
+        const response = await axios.post('http://127.0.0.1:5000/chat', { input: messageContent, session_id: state.sessionId });
         const responseMessage = { content: response.data.response, sender: 'assistant' };
         commit('addMessage', responseMessage);
       } catch (error) {
