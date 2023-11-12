@@ -50,7 +50,7 @@ def chat():
                 {"role": "user", "content": user_input}
             ],
             temperature=1,
-            max_tokens=1000,
+            max_tokens=4000,
             top_p=0.5,
             frequency_penalty=1,
             presence_penalty=0.25
@@ -59,30 +59,11 @@ def chat():
 
         # Store in MongoDB Atlas
         chat_history_collection.insert_one({'session_id': session_id, 'input': user_input, 'response': chat_response})
-    return jsonify({'response': chat_response})
-
         return jsonify({'response': chat_response})
+
     except Exception as e:
         return jsonify({'error': str(e)})
 
-@app.route('/test-openai', methods=['GET'])
-def test_openai():
-    try:
-        response = client_openai.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": "Hello, are you there?"}
-            ],
-            temperature=1,
-            max_tokens=1000,
-            top_p=0.5,
-            frequency_penalty=1,
-            presence_penalty=0.25
-        )
-        return jsonify({'response': response.choices[0].message.content})
-    except Exception as e:
-        return jsonify({'error': str(e)})
 
 @app.route('/history', methods=['GET'])
 def history():
