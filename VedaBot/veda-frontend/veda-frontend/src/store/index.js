@@ -29,7 +29,7 @@ export default createStore({
         this.dispatch('generateSessionId');
       }
       try {
-        const response = await axios.post('https://morstls.com/history', { session_id: state.sessionId });
+        const response = await axios.post('https://faas-blr1-8177d592.doserverless.co/api/v1/web/fn-32596cb4-3128-4e97-a348-3e2cc30f2b34/default/veda-backend/history', { session_id: state.sessionId });
         commit('setMessages', response.data);
       } catch (error) {
         console.error('Error fetching messages:', error);
@@ -39,7 +39,7 @@ export default createStore({
       const message = { content: messageContent, sender: 'user' };
       commit('addMessage', message);
       try {
-        const response = await axios.post('https://morstls.com/chat', { input: messageContent, session_id: state.sessionId });
+        const response = await axios.post('https://faas-blr1-8177d592.doserverless.co/api/v1/web/fn-32596cb4-3128-4e97-a348-3e2cc30f2b34/default/veda-backend/chat', { input: messageContent, session_id: state.sessionId });
         const responseMessage = { content: response.data.response, sender: 'assistant' };
         commit('addMessage', responseMessage);
       } catch (error) {
